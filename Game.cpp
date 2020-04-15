@@ -37,9 +37,6 @@ namespace Program
 
 
 	// Configures the game by setting its Configuration attribute
-	// <params>
-	//		[GameConfiguration] gameConfiguration: object that carries the game's configuration
-	// </params>
 	void Game::Configure()
 	{
 		this->Configuration = new Program::GameConfiguration();
@@ -60,7 +57,6 @@ namespace Program
 	// Runs the game
 	void Game::Run()
 	{
-		//this->RenderWindow = new sf::RenderWindow(sf::VideoMode(200, 200), "SFML works!");
 		sf::CircleShape shape(100.f);
 		shape.setFillColor(sf::Color::Green);
 
