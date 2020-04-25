@@ -1,5 +1,10 @@
 #include "Game.hpp"
 
+#include <iostream>
+using std::cout;
+using std::endl;
+
+#include "Player.hpp"
 
 namespace Program
 {
@@ -8,7 +13,8 @@ namespace Program
 	// Destructor
 	Game::~Game()
 	{
-		delete (this->RenderWindow);
+		delete (this->Window);
+		delete (this->Configuration);
 
 		// Self destruction
 		delete (this->Instance);
@@ -17,7 +23,7 @@ namespace Program
 	// Constructor
 	Game::Game()
 	{
-		this->RenderWindow = nullptr;
+		this->Window = nullptr;
 
 		this->Configure();
 		this->Start();
@@ -45,7 +51,7 @@ namespace Program
 	// Initializes the game
 	void Game::Start()
 	{
-		this->RenderWindow = new sf::RenderWindow(
+		this->Window = new sf::RenderWindow(
 			*(this->Configuration->GetVideoMode()),
 			this->Configuration->GetTitle(),
 			this->Configuration->GetStyle()
@@ -57,21 +63,42 @@ namespace Program
 	// Runs the game
 	void Game::Run()
 	{
-		sf::CircleShape shape(100.f);
-		shape.setFillColor(sf::Color::Green);
+		// Temporary variable to test the Player
+		player_one = new Entities::Player();
 
-		while (this->RenderWindow->isOpen())
+		sf::Clock clock;	// Calculates past time
+		sf::Time elapsed;	// Gets the elapsed time from last loop
+
+		(this->Window)->setFramerateLimit(480);
+
+		// The game runs inside this while loop
+		while ((this->Window)->isOpen())
 		{
 			sf::Event event;
-			while (this->RenderWindow->pollEvent(event))
+			while ((this->Window)->pollEvent(event))	// Gets the application's events 
 			{
-				if (event.type == sf::Event::Closed)
-					this->RenderWindow->close();
+				switch (event.type)
+				{
+				case sf::Event::EventType::Closed:
+					(this->Window)->close();
+					break;
+
+				default:
+					break;
+				}
 			}
 
-			this->RenderWindow->clear();
-			this->RenderWindow->draw(shape);
-			this->RenderWindow->display();
+			(this->Window)->clear(sf::Color::Color(150, 150, 150, 1));
+			(this->Window)->draw(*(player_one->GetAvatar()->GetBody()->GetSprite()->GetBody()));
+			(this->Window)->display();
+
+			player_one->GetAvatar()->Update();
+
+
+			// The "restart" method also returns the elapsed time
+			// elapsed = clock.restart();
 		}
+
+		delete (player_one);
 	}
 }

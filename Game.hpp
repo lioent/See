@@ -4,6 +4,8 @@
 
 #include "GameConfiguration.hpp"
 
+#include "Player.hpp"
+
 namespace Program
 {
 	// Find more about Singleton design pattern implementation at https://sourcemaking.com/design_patterns/singleton/cpp/1
@@ -16,9 +18,11 @@ namespace Program
 	private:
 		static Game* Instance;
 
-		// IMPROVEMENT: Move all the graphic management to a "GraphicHandler" class
-		sf::RenderWindow* RenderWindow;
+		// TO DO: Move all the graphic management to a "GraphicHandler" class
+		sf::RenderWindow* Window;
 		Program::GameConfiguration* Configuration;
+
+		Entities::Player* player_one;
 #pragma endregion
 
 #pragma region Methods
