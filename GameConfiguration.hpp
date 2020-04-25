@@ -13,13 +13,12 @@ namespace Program
 		sf::VideoMode* VideoMode;
 		string Title;
 		unsigned int Style;
-
 #pragma endregion
 
 #pragma region Methods
 	public:
 		~GameConfiguration();
-		GameConfiguration(sf::VideoMode* videoMode = nullptr, string title = "", unsigned int style = sf::Style::Default);
+		GameConfiguration(sf::VideoMode* videoMode = new sf::VideoMode(800, 600), string title = "", unsigned int style = sf::Style::Default);
 
 		sf::VideoMode* GetVideoMode() const { return this->VideoMode; }
 		string GetTitle() const { return this->Title; }

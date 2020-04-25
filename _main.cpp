@@ -1,6 +1,8 @@
 #include "Game.hpp"
 #include "GameConfiguration.hpp"
 
+#include "Player.hpp"
+
 int main()
 {
 	// Initialization of a Singleton class
